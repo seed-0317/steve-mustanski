@@ -138,10 +138,6 @@ public class Lab {
 
 				stack.push(c);
 
-			}else if(c == ']') {
-				if(stack.isEmpty()) return false;
-				if(stack.pop() != '[') return false;
-
 			}else if(c == ')') {
 				if(stack.isEmpty()) return false;
 				if(stack.pop() != '(') return false;
@@ -149,6 +145,10 @@ public class Lab {
 			}else if(c == '}') {
 				if(stack.isEmpty()) return false;
 				if(stack.pop() != '{') return false;
+
+			}else if(c == ']') {
+				if(stack.isEmpty()) return false;
+				if(stack.pop() != '[') return false;
 			}
 
 		}
