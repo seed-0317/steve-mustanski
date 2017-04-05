@@ -86,7 +86,30 @@ public class Lab {
 	  f([1,2,3,4,5], 3) = [4,5,1,2,3]
 	*/
 	public static int[] rotateLeft(int[] array, int n) {
-		return null;
+
+
+		int[]newArr = Arrays.copyOf(array,5);
+
+		//System.out.println(newArr[0]+","+newArr[1]+","+newArr[2]+","+newArr[3]+","+newArr[4]);
+
+		for (int i = 0; i < n; i++){
+
+			newArr[4] = array[0];
+			newArr[3] = array[4];
+			newArr[2] = array[3];
+			newArr[1] = array[2];
+			newArr[0] = array[1];
+
+			array[4] = newArr[4];
+			array[3] = newArr[3];
+			array[2] = newArr[2];
+			array[1] = newArr[1];
+			array[0] = newArr[0];
+
+			//System.out.println(newArr[0]+","+newArr[1]+","+newArr[2]+","+newArr[3]+","+newArr[4]);
+		}
+
+		return newArr;
 	}
 
 	/*
