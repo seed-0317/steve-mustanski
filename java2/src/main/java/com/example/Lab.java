@@ -106,6 +106,8 @@ public class Lab {
 			array[1] = newArr[1];
 			array[0] = newArr[0];
 
+
+
 			//System.out.println(newArr[0]+","+newArr[1]+","+newArr[2]+","+newArr[3]+","+newArr[4]);
 		}
 
@@ -129,9 +131,27 @@ public class Lab {
 	  Return false if not balanced
 	*/
 	public static boolean balancedBrackets(String bracketsString) {
-		return false;
+		Stack<Character> stack  = new Stack<>();
+		for(int i = 0; i < bracketsString.length(); i++) {
+			char c = bracketsString.charAt(i);
+			if(c == '(' || c == '{' || c == '[' ) {
+
+				stack.push(c);
+
+			}else if(c == ']') {
+				if(stack.isEmpty()) return false;
+				if(stack.pop() != '[') return false;
+
+			}else if(c == ')') {
+				if(stack.isEmpty()) return false;
+				if(stack.pop() != '(') return false;
+
+			}else if(c == '}') {
+				if(stack.isEmpty()) return false;
+				if(stack.pop() != '{') return false;
+			}
+
+		}
+		return stack.isEmpty();
 	}
-
-
-
 }
