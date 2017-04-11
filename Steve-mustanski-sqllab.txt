@@ -1,0 +1,109 @@
+2.1 SELECT
+
+Task – Select all records from the Employee table.
+
+	select * from public.employees;
+
+Task – Select all records from the Employee table where last name is King.
+
+	select * from public.employees where last_name = 'King';
+
+Task – Select all records from the Employee table where first name is Andrew and REPORTSTO is NULL.
+
+	select * from public.employees where first_name = 'Andrew' and reports_to is null;
+
+2.2 ORDER BY
+
+Task – Select all albums in Album table and sort result set in descending order by title.
+
+	select * from public.albums order by title desc;
+
+
+Task – Select first name from Customer and sort result set in ascending order by city
+
+	select first_name from public.customers order by city asc;
+
+
+2.3 INSERT INTO
+
+Task – Insert two new records into Genre table
+
+	INSERT INTO public.genres (id, name) VALUES (26, 'Hairbands'),
+  	(27, 'New Wave of British Heavy Metal');
+
+Task – Insert two new records into Employee table
+
+	INSERT INTO employees (id, last_name, first_name, title, reports_to,
+            birth_date, hire_date, address, city, state, country, postal_code, phone, fax, email)
+			VALUES (9, 'Smith', 'Fred', 'VP', NULL, TIMESTAMP '1962-02-18 00:00:00',
+           TIMESTAMP'1962-02-18 00:00:00',
+           '1313 Mockingbird Lane', 'Richmond', 'VA','USA',
+        	12345,'800-123-1234', '800-123-4567', 'abc@gmail.com');
+
+
+	INSERT INTO employees (id, last_name, first_name, title, reports_to,
+            birth_date, hire_date, address, city, state, country, postal_code, phone, fax, email)
+			VALUES (9, 'Jones', 'Alice', 'MVP', NULL, TIMESTAMP '1962-02-18 00:00:00',
+           TIMESTAMP'1962-02-18 00:00:00',
+           '704 Hauser Street', 'Richmond', 'VA','USA',
+        	12345,'800-123-1234', '800-123-4567', 'abc@gmail.com');
+
+Task – Insert two new records into Customer table
+
+	INSERT INTO customers (id, first_name, last_name, company, address, city, state, postal_code, email)
+		VALUES (60, 'Roger', 'Dodger', 'Capital One', '21B Baker Street',
+        'London Town', 'VA', 14354, 'annoying@gmail.com');
+
+	INSERT INTO customers (id, first_name, last_name, company, address, city, state, postal_code, email)
+		VALUES (61, 'Kelley', 'Schpelly', 'Capital One', '21B Baker Street',
+        'London Town', 'VA', 14354, 'reallyannoying@gmail.com');
+        
+        
+2.4 UPDATE
+
+Task – Update Aaron Mitchell in Customer table to Robert Walter
+
+        Update customers set first_name = 'Robert', last_name = 'Mitchell'
+		where first_name = 'Aaron' and last_name = 'Mitchell';
+
+
+Task – Update name of artist in the Artist table “Creedence Clearwater Revival” to “CCR”
+
+	UPDATE artists set name = 'CCR'
+	WHERE name = 'Creedence Clearwater Revival';
+	
+2.5 LIKE
+
+Task – Select all invoices with a billing address like “T%”
+
+	SELECT id from invoices where billing_address like 'T%';
+
+2.6 BETWEEN
+
+Task – Select all invoices that have a total between 15 and 50
+
+	select id from invoices where total BETWEEN 15 and 50;
+
+
+Task – Select all employees hired between 1st of June 2003 and 1st of March 2004
+
+	SELECT * FROM employees where hire_date BETWEEN TIMESTAMP '2003-6-1' and TIMESTAMP '2004-3-1'
+	
+2.7 DELETE
+
+Task – Delete a record in Customer table where the name is Robert Walter 
+(There may be constraints that rely on this, find out how to resolve them).
+
+	BEGIN;
+
+	Delete from invoice_lines where invoice_id in (select id from invoices where customer_id =
+	(SELECT id from customers where first_name = 'Robert' and last_name = 'Mitchell'));
+
+	delete  from invoices where customer_id =
+	(SELECT id from customers where first_name = 'Robert' and last_name = 'Mitchell');
+
+	Delete from customers where first_name = 'Robert' and last_name = 'Mitchell';
+
+	COMMIT;
+	
+	
