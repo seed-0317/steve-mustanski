@@ -107,3 +107,26 @@ Task – Delete a record in Customer table where the name is Robert Walter
 	COMMIT;
 	
 	
+	
+	
+	
+	
+	
+	
+	7.1 INNER
+
+Task – Create an inner join that joins customers and orders and specifies the name of the 
+customer and the invoiceId.
+
+	SELECT customers.last_name, invoices.id from customers INNER JOIN invoices on
+	customers.id = invoices.customer_id ORDER BY customers.id, invoices.id
+
+7.2 OUTER
+
+	Task – Create an outer join that joins the customer and invoice table, 
+	specifying the CustomerId, firstname, lastname, invoiceId, and total.
+	
+		SELECT invoices.customer_id, customers.first_name, customers.last_name, invoices.id, invoices.total
+		from customers FULL OUTER JOIN invoices
+		on customers.id = invoices.customer_id ORDER BY customers.id, invoices.id
+
