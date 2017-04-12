@@ -126,7 +126,28 @@ customer and the invoiceId.
 	Task – Create an outer join that joins the customer and invoice table, 
 	specifying the CustomerId, firstname, lastname, invoiceId, and total.
 	
-		SELECT invoices.customer_id, customers.first_name, customers.last_name, invoices.id, invoices.total
-		from customers FULL OUTER JOIN invoices
-		on customers.id = invoices.customer_id ORDER BY customers.id, invoices.id
+		SELECT i.customer_id, c.first_name, c.last_name, i.id, i.total
+		from customers c FULL OUTER JOIN invoices i
+		on c.id = i.customer_id ORDER BY c.id, i.id
+		
+7.3 RIGHT
 
+Task – Create a right join that joins album and artist specifying artist name and title.
+
+	SELECT art.name, alb.title from artists art RIGHT JOIN albums alb
+  	on art.id = alb.artist_id;
+  	
+7.4 CROSS
+
+Task – Create a cross join that joins album and artist and sorts by artist name in ascending order.
+
+	SELECT art.name, alb.title from artists art CROSS JOIN  albums alb
+    order by art.name ASC
+    
+7.5 SELF
+
+Task – Perform a self-join on the employee table, joining on the reportsto column.
+
+	select e.last_name as employee, b.last_name as manager
+	from employees e, employees b
+	where e.reports_to = b.id
