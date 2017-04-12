@@ -106,10 +106,24 @@ Task – Delete a record in Customer table where the name is Robert Walter
 
 	COMMIT;
 	
+3.1 System Defined Functions
+
+Task – Create a function that returns the current time.
+
 	
+	create or REPLACE FUNCTION mytime()
+    RETURNS timestamp WITH TIME ZONE as $$
+    SELECT now();
+    $$ LANGUAGE sql;
+
+Task – create a function that returns the length of a mediatype from the mediatype table	
 	
-	
-	
+	create or REPLACE FUNCTION medialegth(in int)
+    RETURNS int as $$
+	SELECT length(media_types.name) from media_types
+	where media_types.id = $1
+	$$ LANGUAGE sql;
+
 	
 	
 	
