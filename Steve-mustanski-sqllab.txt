@@ -137,8 +137,8 @@ Task – Create a function that returns the average total of all invoices
 Task – Create a function that returns the most expensive track
 
 	CREATE OR REPLACE FUNCTION exptrack()
-    RETURNS NUMERIC as $$
-	select max(unit_price) from tracks
+    RETURNS table (name text) as $$
+	select name from tracks WHERE unit_price = (select max(unit_price) from tracks)
 	$$ LANGUAGE sql;
 	
 3.3 User Defined Scalar Functions
@@ -154,7 +154,11 @@ Task – Create a function that returns the average price of invoiceline items i
 
 Task – Create a function that returns all employees who are born after 1968.
 
-
+	CREATE OR REPLACE FUNCTION emplage()
+    RETURNS TABLE (name text, lname text) AS $$
+    select last_name, first_name from employees
+    where birth_date::DATE > '1968-12-31'
+    $$ LANGUAGE SQL;
 	
 	
 	7.1 INNER
