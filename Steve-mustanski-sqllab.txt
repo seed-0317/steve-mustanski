@@ -141,6 +141,21 @@ Task – Create a function that returns the most expensive track
 	select max(unit_price) from tracks
 	$$ LANGUAGE sql;
 	
+3.3 User Defined Scalar Functions
+
+Task – Create a function that returns the average price of invoiceline items in the invoiceline table
+
+	CREATE OR REPLACE FUNCTION avginvoice()
+    RETURNS numeric as $$
+    select avg(total) from invoices
+    $$ language sql;
+    
+3.4 User Defined Table Valued Functions
+
+Task – Create a function that returns all employees who are born after 1968.
+
+
+	
 	
 	7.1 INNER
 
