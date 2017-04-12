@@ -124,7 +124,22 @@ Task – create a function that returns the length of a mediatype from the media
 	where media_types.id = $1
 	$$ LANGUAGE sql;
 
-	
+3.2 System Defined Aggregate Functions
+
+Task – Create a function that returns the average total of all invoices
+
+	CREATE OR REPLACE FUNCTION avgtotal()
+    returns NUMERIC as $$
+	SELECT avg(total) from invoices
+	$$ LANGUAGE sql;
+
+
+Task – Create a function that returns the most expensive track
+
+	CREATE OR REPLACE FUNCTION exptrack()
+    RETURNS NUMERIC as $$
+	select max(unit_price) from tracks
+	$$ LANGUAGE sql;
 	
 	
 	7.1 INNER
