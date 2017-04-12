@@ -159,7 +159,60 @@ Task – Create a function that returns all employees who are born after 1968.
     select last_name, first_name from employees
     where birth_date::DATE > '1968-12-31'
     $$ LANGUAGE SQL;
-	
+    
+6.1 AFTER/FOR
+
+Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
+
+    
+ 	create function log_employee_insert() returns trigger as $$
+	begin
+    raise notice 'employee created';
+    return NEW;
+	end; $$ language plpgsql;
+
+	CREATE TRIGGER fc_log_empl
+	AFTER INSERT
+    ON employees
+	FOR EACH ROW
+	EXECUTE PROCEDURE log_employee_insert();
+
+	insert INTO employees (id, last_name, first_name, reports_to, hire_date) VALUES (10, 'smith',
+	'adrian' ,2, TIMESTAMP'2004-03-04 00:00:00');   
+
+Task – Create an after update trigger on the album table that fires after a row is inserted in the table
+
+	create function log_album_update() returns trigger as $$
+	begin
+    raise notice 'album updated';
+    return NEW;
+	end; $$ language plpgsql;
+
+	CREATE TRIGGER fc_log_album_update
+	AFTER UPDATE
+    ON albums
+	FOR EACH ROW
+	EXECUTE PROCEDURE log_album_update();
+
+	update albums set title = 'Greatest Hits III' where id = 36;
+
+
+
+Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
+   
+	create function log_customer_delete() returns trigger as $$
+	begin
+    raise notice 'customer deleted';
+    return NEW;
+	end; $$ language plpgsql;
+
+	CREATE TRIGGER fc_log_customer_delete
+	AFTER DELETE
+    ON customers
+	FOR EACH ROW
+	EXECUTE PROCEDURE log_customer_delete();
+
+	delete from customers where id = 61;
 	
 	7.1 INNER
 
